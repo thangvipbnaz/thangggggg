@@ -6,6 +6,6 @@
     <title>Document</title>
 </head>
 <body>
-    <a href="https://ihentai.ws">a</a>
+    <a href="https://ihentai.ws">hentaiz</a>
 </body>
 </html>
