@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thời Trang - ShopNow</title>
+    <link rel="stylesheet" href="shoppee.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        .category-filter {
+            background-color: white;
+            border-radius: 4px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+        }
+
+        .filter-section {
+            margin-bottom: 15px;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 15px;
+        }
+
+        .filter-section:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .filter-title {
+            font-size: 16px;
+            font-weight: 500;
+            margin-bottom: 10px;
+            color: #333;
+        }
+
+        .filter-options {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .filter-checkbox {
+            display: flex;
+            align-items: center;
+            margin-bottom: 5px;
+            width: calc(50% - 5px);
+        }
+
+        .filter-checkbox input {
+            margin-right: 5px;
+        }
+
+        .price-inputs {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .price-input {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+
+        .apply-filter-btn {
+            background-color: #ff5722;
+            color: white;
+            padding: 8px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        .category-layout {
+            display: grid;
+            grid-template-columns: 250px 1fr;
+            gap: 20px;
+        }
+
+        .sort-bar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background-color: white;
+            padding: 15px;
+            border-radius: 4px;
+            margin-bottom: 20px;
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+        }
+
+        .sort-options {
+            display: flex;
+            gap: 15px;
+        }
+
+        .sort-option {
+            padding: 6px 12px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        .sort-option.active {
+            background-color: #ff5722;
+            color: white;
+            border-color: #ff5722;
+        }
+
+        .pagination {
+            display: flex;
+            justify-content: center;
+            margin-top: 30px;
+            margin-bottom: 20px;
+        }
+
+        .pagination-item {
+            width: 35px;
+            height: 35px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid #ddd;
+            margin: 0 5px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .pagination-item.active {
+            background-color: #ff5722;
+            color: white;
+            border-color: #ff5722;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container header-container">
+            <a href="shoppe.html" class="logo-container">
+                <?xml version="1.0" encoding="UTF-8"?>
+<svg width="200" height="60" viewBox="0 0 200 60" xmlns="http://www.w3.org/2000/svg">
+  <rect width="200" height="60" fill="#ff5722" rx="8" ry="8"/>
+  <text x="30" y="40" font-family="Arial, sans-serif" font-size="28" font-weight="bold" fill="white">ShopNow</text>
+  <path d="M170 20 C175 20, 180 25, 180 30 C180 35, 175 40, 170 40" stroke="white" stroke-width="2" fill="none"/>
+  <path d="M180 20 C185 20, 190 25, 190 30 C190 35, 185 40, 180 40" stroke="white" stroke-width="2" fill="none"/>
+</svg>
+            </a>
+
+            <div class="search-bar">
+                <input type="text" class="search-input" placeholder="Tìm sản phẩm, thương hiệu và tên shop...">
+                <button class="search-button">
+                    <i class="fas fa-search"></i>
+                </button>
+            </div>
+
+            <nav class="header-nav">
+                <a href="#" class="header-nav-item">
+                    <i class="fas fa-shopping-cart"></i>
+                    Giỏ hàng
+                </a>
+                <a href="#" class="header-nav-item">
+                    <i class="fas fa-user"></i>
+                    Đăng nhập
+                </a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main">
+        <div class="container">
+            <!-- Breadcrumb -->
+            <div class="breadcrumb">
+                <a href="../index.html">Trang chủ</a>
+                <span>></span>
+                <span>Thời trang</span>
+            </div>
+
+            <!-- Category Banner -->
+            <div class="main-carousel">
+                <div class="carousel-item">
+                    <img src="../images/banners/banner1.svg" alt="Thời trang khuyến mãi">
+                </div>
+            </div>
+
+            <div class="category-layout">
+                <!-- Filter Sidebar -->
+                <div class="category-filter">
+                    <div class="filter-section">
+                        <div class="filter-title">Danh mục con</div>
+                        <div class="filter-options">
+                            <div class="filter-checkbox">
+                                <input type="checkbox" id="category-1">
+                                <label for="category-1">Áo thun</label>
+                            </div>
+                            <div class="filter-checkbox">
+                                <input type="checkbox" id="category-2">
+                                <label for="category-2">Áo sơ mi</label>
+                            </div>
+                            <div class="filter-checkbox">
+                                <input type="checkbox" id="category-3" checked>
+                                <label for="category-3">Quần jeans</label>
+                            </div>
+                            <div class="filter-checkbox">
+                                <input type="checkbox" id="category-4">
+                                <label for="category-4">Quần kaki</label>
+                            </div>
+                            <div class="filter-checkbox">
+                                <input type="checkbox" id="category-5">
+                                <label for="category-5">Váy đầm</label>
+                            </div>
+                            <div class="filter-checkbox">
+                                <input type="checkbox" id="category-6">
+                                <label for="category-6">Áo khoác</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="filter-section">
+                        <div class="filter-title">Khoảng giá</div>
+                        <div class="price-inputs">
+                            <input type="text" class="price-input" placeholder="Từ">
+                            <span>-</span>
+                            <input type="text" class="price-input" placeholder="Đến">
+                        </div>
+                        <button class="apply-filter-btn" style="margin-top: 10px;">Áp dụng</button>
+                    </div>
+
+                    <div class="filter-section">
+                        <div class="filter-title">Thương hiệu</div>
+                        <div class="filter-options">
+                            <div class="filter-checkbox">
+                                <input type="checkbox" id="brand-1">
+                                <label for="brand-1">Nike</label>
+                            </div>
+                            <div class="filter-checkbox">
+                                <input type="checkbox" id="brand-2">
+                                <label for="brand-2">Adidas</label>
+                            </div>
+                            <div class="filter-checkbox">
+                                <input type="checkbox" id="brand-3">
+                                <label for="brand-3">Zara</label>
+                            </div>
+                            <div class="filter-checkbox">
+                                <input type="checkbox" id="brand-4">
+                                <label for="brand-4">H&M</label>
+                            </div>
+                            <div class="filter-checkbox">
+                                <input type="checkbox" id="brand-5">
+                                <label for="brand-5">Uniqlo</label>
+                            </div>
+                            <div class="filter-checkbox">
+                                <input type="checkbox" id="brand-6">
+                                <label for="brand-6">Levi's</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="filter-section">
+                        <div class="filter-title">Đánh giá</div>
+                        <div class="filter-options">
+                            <div class="filter-checkbox">
+                                <input type="checkbox" id="rating-5">
+                                <label for="rating-5">
+                                    <i class="fas fa-star" style="color: #ee4d2d;"></i>
+                                    <i class="fas fa-star" style="color: #ee4d2d;"></i>
+                                    <i class="fas fa-star" style="color: #ee4d2d;"></i>
+                                    <i class="fas fa-star" style="color: #ee4d2d;"></i>
+                                    <i class="fas fa-star" style="color: #ee4d2d;"></i>
+                                </label>
+                            </div>
+                            <div class="filter-checkbox">
+                                <input type="checkbox" id="rating-4">
+                                <label for="rating-4">
+                                    <i class="fas fa-star" style="color: #ee4d2d;"></i>
+                                    <i class="fas fa-star" style="color: #ee4d2d;"></i>
+                                    <i class="fas fa-star" style="color: #ee4d2d;"></i>
+                                    <i class="fas fa-star" style="color: #ee4d2d;"></i>
+                                    <i class="fas fa-star" style="color: #ddd;"></i>
+                                    trở lên
+                                </label>
+                            </div>
+                            <div class="filter-checkbox">
+                                <input type="checkbox" id="rating-3">
+                                <label for="rating-3">
+                                    <i class="fas fa-star" style="color: #ee4d2d;"></i>
+                                    <i class="fas fa-star" style="color: #ee4d2d;"></i>
+                                    <i class="fas fa-star" style="color: #ee4d2d;"></i>
+                                    <i class="fas fa-star" style="color: #ddd;"></i>
+                                    <i class="fas fa-star" style="color: #ddd;"></i>
+                                    trở lên
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Products List -->
+                <div class="category-products">
+                    <div class="sort-bar">
+                        <div class="results-count">
+                            <span>Tìm thấy 356 sản phẩm</span>
+                        </div>
+                        <div class="sort-options">
+                            <div class="sort-option active">Phổ biến</div>
+                            <div class="sort-option">Mới nhất</div>
+                            <div class="sort-option">Bán chạy</div>
+                            <div class="sort-option">Giá: Thấp đến Cao</div>
+                            <div class="sort-option">Giá: Cao đến Thấp</div>
+                        </div>
+                    </div>
+
+                    <div class="products-grid">
+                        <div class="product-card">
+                            <a href="../san-pham/ao-thun-nam.html">
+                                <img src="../images/products/fashion/ao-thun-nam.svg" alt="Áo thun nam" class="product-image">
+                                <div class="product-info">
+                                    <h3 class="product-name">Áo thun nam cổ tròn thời trang với thiết kế đơn giản</h3>
+                                    <div class="product-price">
+                                        150.000đ <span class="original-price">200.000đ</span>
+                                    </div>
+                                    <div class="product-meta">
+                                        <div class="product-rating">
+                                            <i class="fas fa-star"></i>
+                                            <span>4.9</span>
+                                        </div>
+                                        <div class="product-sold">Đã bán 1.2k</div>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+
+                        <div class="product-card">
+                            <a href="../san-pham/quan-jeans.html">
+                                <img src="../images/products/fashion/quan-jeans.svg" alt="Quần jeans" class="product-image">
+                                <div class="product-info">
+                                    <h3 class="product-name">Quần jeans nam rách gối thời trang, dáng Slim Fit</h3>
+                                    <div class="product-price">
+                                        280.000đ <span class="original-price">350.000đ</span>
+                                    </div>
+                                    <div class="product-meta">
+                                        <div class="product-rating">
+                                            <i class="fas fa-star"></i>
+                                            <span>4.8</span>
+                                        </div>
+                                        <div class="product-sold">Đã bán 952</div>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+
+                        <div class="product-card">
+                            <a href="../san-pham/ao-thun-nu.html">
+                                <img src="../images/products/fashion/ao-thun-nam.svg" alt="Áo thun nữ" class="product-image">
+                                <div class="product-info">
+                                    <h3 class="product-name">Áo thun nữ form rộng phong cách Hàn Quốc</h3>
+                                    <div class="product-price">
+                                        120.000đ <span class="original-price">180.000đ</span>
+                                    </div>
+                                    <div class="product-meta">
+                                        <div class="product-rating">
+                                            <i class="fas fa-star"></i>
+                                            <span>4.7</span>
+                                        </div>
+                                        <div class="product-sold">Đã bán 2.3k</div>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+
+                        <div class="product-card">
+                            <a href="../san-pham/quan-jean-nu.html">
+                                <img src="../images/products/fashion/quan-jeans.svg" alt="Quần jean nữ" class="product-image">
+                                <div class="product-info">
+                                    <h3 class="product-name">Quần jean nữ ống rộng, lưng cao thời trang</h3>
+                                    <div class="product-price">
+                                        250.000đ <span class="original-price">320.000đ</span>
+                                    </div>
+                                    <div class="product-meta">
+                                        <div class="product-rating">
+                                            <i class="fas fa-star"></i>
+                                            <span>4.6</span>
+                                        </div>
+                                        <div class="product-sold">Đã bán 1.5k</div>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+
+                        <div class="product-card">
+                            <a href="#">
+                                <img src="../images/products/fashion/quan-jeans.svg" alt="Quần jean nam" class="product-image">
+                                <div class="product-info">
+                                    <h3 class="product-name">Quần jean nam ống suông, không rách</h3>
+                                    <div class="product-price">
+                                        299.000đ <span class="original-price">359.000đ</span>
+                                    </div>
+                                    <div class="product-meta">
+                                        <div class="product-rating">
+                                            <i class="fas fa-star"></i>
+                                            <span>4.7</span>
+                                        </div>
+                                        <div class="product-sold">Đã bán 897</div>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+
+                        <div class="product-card">
+                            <a href="#">
+                                <img src="../images/products/fashion/quan-jeans.svg" alt="Quần short jeans" class="product-image">
+                                <div class="product-info">
+                                    <h3 class="product-name">Quần short jeans nam rách lai thời trang</h3>
+                                    <div class="product-price">
+                                        180.000đ <span class="original-price">230.000đ</span>
+                                    </div>
+                                    <div class="product-meta">
+                                        <div class="product-rating">
+                                            <i class="fas fa-star"></i>
+                                            <span>4.5</span>
+                                        </div>
+                                        <div class="product-sold">Đã bán 723</div>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+
+                        <div class="product-card">
+                            <a href="#">
+                                <img src="../images/products/fashion/ao-thun-nam.svg" alt="Áo thun nam" class="product-image">
+                                <div class="product-info">
+                                    <h3 class="product-name">Áo thun nam Cotton USA 100%, thấm hút mồ hôi</h3>
+                                    <div class="product-price">
+                                        189.000đ <span class="original-price">250.000đ</span>
+                                    </div>
+                                    <div class="product-meta">
+                                        <div class="product-rating">
+                                            <i class="fas fa-star"></i>
+                                            <span>4.9</span>
+                                        </div>
+                                        <div class="product-sold">Đã bán 2.5k</div>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+
+                        <div class="product-card">
+                            <a href="#">
+                                <img src="../images/products/fashion/ao-thun-nam.svg" alt="Áo sơ mi nam" class="product-image">
+                                <div class="product-info">
+                                    <h3 class="product-name">Áo sơ mi nam dài tay công sở cao cấp</h3>
+                                    <div class="product-price">
+                                        259.000đ <span class="original-price">320.000đ</span>
+                                    </div>
+                                    <div class="product-meta">
+                                        <div class="product-rating">
+                                            <i class="fas fa-star"></i>
+                                            <span>4.8</span>
+                                        </div>
+                                        <div class="product-sold">Đã bán 1.8k</div>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Pagination -->
+                    <div class="pagination">
+                        <div class="pagination-item active">1</div>
+                        <div class="pagination-item">2</div>
+                        <div class="pagination-item">3</div>
+                        <div class="pagination-item">4</div>
+                        <div class="pagination-item">5</div>
+                        <div class="pagination-item">...</div>
+                        <div class="pagination-item">45</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-container">
+                <div class="footer-section">
+                    <h3>Chăm sóc khách hàng</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Trung tâm trợ giúp</a></li>
+                        <li><a href="#">ShopNow Blog</a></li>
+                        <li><a href="#">Hướng dẫn mua hàng</a></li>
+                        <li><a href="#">Thanh toán</a></li>
+                        <li><a href="#">Vận chuyển</a></li>
+                        <li><a href="#">Chính sách bảo hành</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h3>Về ShopNow</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Giới thiệu về ShopNow</a></li>
+                        <li><a href="#">Tuyển dụng</a></li>
+                        <li><a href="#">Điều khoản</a></li>
+                        <li><a href="#">Chính sách bảo mật</a></li>
+                        <li><a href="#">Kênh người bán</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h3>Phương thức thanh toán</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Thẻ tín dụng</a></li>
+                        <li><a href="#">Chuyển khoản ngân hàng</a></li>
+                        <li><a href="#">Thanh toán khi nhận hàng</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h3>Theo dõi chúng tôi</h3>
+                    <ul class="footer-links">
+                        <li><a href="#"><i class="fab fa-facebook"></i> Facebook</a></li>
+                        <li><a href="#"><i class="fab fa-instagram"></i> Instagram</a></li>
+                        <li><a href="#"><i class="fab fa-linkedin"></i> LinkedIn</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2025 ShopNow. Tất cả các quyền được bảo lưu.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Simple JavaScript for sort options
+        document.addEventListener('DOMContentLoaded', function() {
+            const sortOptions = document.querySelectorAll('.sort-option');
+
+            sortOptions.forEach(option => {
+                option.addEventListener('click', function() {
+                    // Remove active class from all options
+                    sortOptions.forEach(o => o.classList.remove('active'));
+                    // Add active class to clicked option
+                    this.classList.add('active');
+                });
+            });
+
+            // Pagination
+            const paginationItems = document.querySelectorAll('.pagination-item');
+
+            paginationItems.forEach(item => {
+                item.addEventListener('click', function() {
+                    if (this.textContent !== '...') {
+                        // Remove active class from all items
+                        paginationItems.forEach(i => i.classList.remove('active'));
+                        // Add active class to clicked item
+                        this.classList.add('active');
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
